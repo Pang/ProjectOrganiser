@@ -26,10 +26,16 @@ export const store = new Vuex.Store({
             }
         ]
     },
-    getters: {
-        addTask: state => (title, text) => {
-            return state.taskLists.find(taskLists => title === taskLists.title)
-                .tasks.unshift(text);
+    mutations: {
+        addTask: (state, payload) => {
+            // console.log(payload);
+            state.taskLists.find(taskLists => payload.title === taskLists.title)
+                .tasks.unshift(payload.text);
+        }
+    },
+    actions: {
+        addTask: ({ commit }, payload) => {
+            commit('addTask', payload);
         }
     }
-})
+});

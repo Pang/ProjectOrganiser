@@ -18,9 +18,8 @@
 </template>
 
 <script>
-import Task from './Task'
-import draggable from 'vuedraggable'
-import {mapGetters} from 'vuex';
+import Task from './Task';
+import draggable from 'vuedraggable';
 
 export default {
     name: 'Column',
@@ -36,17 +35,19 @@ export default {
         }
     },
     computed: {
-        ...mapGetters([
-            'addTask'
-        ])
+
     },
     methods: {
         log() {
-            this.$store.getters.addTask(this.column.title, this.addNoteText);
+            this.$store.dispatch('addTask',
+                {
+                    title: this.column.title, text: this.addNoteText
+                });
             this.showAddBox();
         },
         showAddBox() {
             this.addNote = !this.addNote;
+            this.addNoteText = "";
         }
     }
 }
