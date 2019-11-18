@@ -1,6 +1,14 @@
 <template>
 <div class="hello">
-  <h1>Organiser</h1>
+  <h1>Project Organiser</h1>
+  <button @click="addingCol = !addingCol">+ Add Column</button>
+  <br>
+  <div :class="[addingCol ? 'showBox' : 'hideBox']"> 
+      <textarea v-model="addColHeader"></textarea> <br>
+      <span @click="addCol(addColHeader)">Add</span> - 
+      <span @click="addingCol = !addingCol">Cancel</span>
+  </div>
+  <br>
   <Column class="col" v-for="(column, index) in columns" 
     :key="index" :column="column"/>
 </div>
@@ -16,11 +24,14 @@ export default {
   },
   data() {
     return {
-      columns: this.$store.state.taskLists
+      columns: this.$store.state.taskLists,
+      addingCol: false,
+      addColHeader: ""
     }
   },
   methods: {
-    log() {
+    addCol() {
+      this.$store.dispatch('addColumn', { text: this.addColHeader });
     }
   }
 }
@@ -34,16 +45,11 @@ export default {
   vertical-align: top;
 }
 
-h3 {
-  margin: 40px 0 0;
+.hideBox {
+  display: none;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
+.showbox {
+  display: block;
 }
 a {
   color: #42b983;

@@ -11,9 +11,6 @@ export default {
     name: "Task",
     props: ["task"],
     methods: {
-        log() {
-            console.log()
-        }
     }
 }
 </script>
@@ -23,6 +20,8 @@ export default {
         width: 180px;
         margin: 5px auto;
         padding: 5px 0;
-        background-color: rgb(211, 211, 233); 
+        background-color: #a9e4cd; 
+        border: dotted 2px #619983;
+        cursor: pointer;
     }
 </style>

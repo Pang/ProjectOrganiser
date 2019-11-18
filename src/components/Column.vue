@@ -57,7 +57,7 @@ export default {
     .column {
         height: 100%;
         width: 200px;
-        border: black solid 2px;
+        border: black solid 1px;
     }
     .showBox {
         display: block;
