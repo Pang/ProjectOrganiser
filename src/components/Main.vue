@@ -32,6 +32,8 @@ export default {
   methods: {
     addCol() {
       this.$store.dispatch('addColumn', { text: this.addColHeader });
+      this.addColHeader = "";
+      this.addingCol = !this.addingCol;
     }
   }
 }
