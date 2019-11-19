@@ -61,12 +61,14 @@ export default {
             this.addNoteText = "";
         },
         removeCol() {
-            this.$store.dispatch('removeColumn', { title: this.column.title });
-
+            this.$store.state.selectedCol = this.column.title;
+            this.$store.state.modalCol = true;
+            this.$store.state.modalColRemove = true;
         },
         editCol() {
             this.$store.state.selectedCol = this.column.title;
             this.$store.state.modalCol = true;
+            this.$store.state.modalColEdit = true;
         }
     }
 }

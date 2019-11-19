@@ -32,9 +32,6 @@ export const store = new Vuex.Store({
 
     },
     getters: {
-        selectedColumn: state => {
-            return state.selectedCol;
-        }
     },
     mutations: {
         addColumn: (state, payload) => {
