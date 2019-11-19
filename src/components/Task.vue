@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="task">
-            <p>{{ task }}</p>
+            <span style="float:right"><b>···</b></span><br>
+            <span style="padding-bottom: 20px">{{ task }}</span>
         </div>
     </div>
 </template>
@@ -19,9 +20,9 @@ export default {
     .task {
         width: 180px;
         margin: 5px auto;
-        padding: 5px 0;
         background-color: #a9e4cd; 
         border: dotted 2px #619983;
         cursor: pointer;
+        padding-bottom: 15px;
     }
 </style>

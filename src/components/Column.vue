@@ -3,7 +3,9 @@
     <div class="column">
         <div class="toolbar">
             <div class="dropdown">
-                <span class="moreIcon"><b>...</b></span>
+                <span class="moreIcon"><b>···</b></span>
+                <span class="moreIcon" @click="addNote = !addNote"><b>+</b></span><br>
+
                 <div class="dropdown-content">
                     <ul>
                         <li @click="editCol()">Edit Header</li>
@@ -11,13 +13,12 @@
                     </ul>
                 </div>
             </div>
-            <span class="moreIcon" @click="addNote = !addNote"><b>+</b></span>
         </div>
 
-        <h4>{{ column.title }}</h4>
+        <h4 style="margin-top: 10px">{{ column.title }}</h4>
         <div :class="[addNote ? 'showBox' : 'hideBox']"> 
             <textarea v-model="addNoteText"></textarea> <br>
-            <span @click="log()">Add</span> - 
+            <span @click="addTask()">Add</span> - 
             <span @click="addNote = !addNote">Cancel</span>
         </div>
 
@@ -48,7 +49,7 @@ export default {
         }
     },
     methods: {
-        log() {
+        addTask() {
             this.$store.dispatch('addTask',
                 {
                     title: this.column.title, text: this.addNoteText
