@@ -11,16 +11,21 @@
   <br>
   <Column class="col" v-for="(column, index) in columns" 
     :key="index" :column="column"/>
+
+  <ModalCol v-if="$store.state.modalCol"/>
+  
 </div>
 </template>
 
 <script>
 import Column from './Column.vue'
+import ModalCol from './modals/ModalCol'
 
 export default {
   name: 'Main',
   components: {
-    Column
+    Column,
+    ModalCol
   },
   data() {
     return {
@@ -46,7 +51,6 @@ export default {
   margin: 0 10px;
   vertical-align: top;
 }
-
 .hideBox {
   display: none;
 }

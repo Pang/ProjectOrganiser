@@ -1,22 +1,28 @@
 <template>
 <div>
     <div class="column">
-        <div class="dropdown">
-            <button class="moreIcon"><b>...</b></button>
-            <div class="dropdown-content">
-                <ul>
-                    <li>Edit Header</li>
-                    <li @click="removeCol()">Remove Column</li>
-                </ul>
+        <div class="toolbar">
+            <div class="dropdown">
+                <span class="moreIcon"><b>...</b></span>
+                <div class="dropdown-content">
+                    <ul>
+                        <li @click="editCol()">Edit Header</li>
+                        <li @click="removeCol()">Remove Column</li>
+                    </ul>
+                </div>
             </div>
+            <span class="moreIcon" @click="addNote = !addNote"><b>+</b></span>
         </div>
-        <button class="moreIcon" @click="addNote = !addNote"><b>+</b></button>
+        <div class="modal">
+            
+        </div>
+
 
         <h4>{{ column.title }}</h4>
         <div :class="[addNote ? 'showBox' : 'hideBox']"> 
             <textarea v-model="addNoteText"></textarea> <br>
             <span @click="log()">Add</span> - 
-            <span @click="showAddBox">Cancel</span>
+            <span @click="addNote = !addNote">Cancel</span>
         </div>
 
         <draggable v-model="column.tasks" group="items" @start="drag=true" @end="drag=false">
@@ -45,23 +51,22 @@ export default {
             addNote: false
         }
     },
-    computed: {
-
-    },
     methods: {
         log() {
             this.$store.dispatch('addTask',
                 {
                     title: this.column.title, text: this.addNoteText
                 });
-            this.showAddBox();
-        },
-        showAddBox() {
             this.addNote = !this.addNote;
             this.addNoteText = "";
         },
         removeCol() {
-            this.$store.dispatch('removeColumn', { title: this.column.title })
+            this.$store.dispatch('removeColumn', { title: this.column.title });
+
+        },
+        editCol() {
+            this.$store.state.selectedCol = this.column.title;
+            this.$store.state.modalCol = true;
         }
     }
 }
@@ -70,8 +75,10 @@ export default {
 <style scoped>
     .moreIcon {
         float: right;
+        margin-left: 5px;
+        font-size: 20px;
+        cursor: pointer;
     }
-
     .dropdown {
         position: relative;
     }
@@ -103,7 +110,12 @@ export default {
         list-style-type: none;
         cursor: pointer;
     }
+
+    li + li {
+        margin-top: 10px;
+    }
     ul{
+        margin: 0;
         padding: 0;
     }
 

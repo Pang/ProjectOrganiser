@@ -24,7 +24,17 @@ export const store = new Vuex.Store({
                     "Complete template"
                 ]
             }
-        ]
+        ],
+        selectedCol: "",
+        modalCol: false,
+        modalColRemove: false,
+        modalColEdit: false
+
+    },
+    getters: {
+        selectedColumn: state => {
+            return state.selectedCol;
+        }
     },
     mutations: {
         addColumn: (state, payload) => {
@@ -33,8 +43,10 @@ export const store = new Vuex.Store({
         removeColumn: (state, payload) => {
             state.taskLists.splice(state.taskLists.findIndex(taskLists => payload.title === taskLists.title), 1);
         },
+        editColumnHeader: (state, payload) => {
+            state.taskLists.find(taskLists => payload.title === taskLists.title).title = payload.newTitle;
+        },
         addTask: (state, payload) => {
-            // console.log(payload);
             state.taskLists.find(taskLists => payload.title === taskLists.title)
                 .tasks.unshift(payload.text);
         }
@@ -45,6 +57,9 @@ export const store = new Vuex.Store({
         },
         removeColumn: ({ commit }, payload) => {
             commit("removeColumn", payload)
+        },
+        editColumnHeader: ({ commit }, payload) => {
+            commit("editColumnHeader", payload)
         },
         addTask: ({ commit }, payload) => {
             commit("addTask", payload);
