@@ -1,17 +1,13 @@
 <template>
 <div class="hello">
   <h1>Project Organiser</h1>
-  <button @click="addingCol = !addingCol">+ Add Column</button>
+  <button @click="addCol()">+ Add Column</button>
   <br>
-  <div :class="[addingCol ? 'showBox' : 'hideBox']"> 
-      <textarea v-model="addColHeader"></textarea> <br>
-      <span @click="addCol(addColHeader)">Add</span> - 
-      <span @click="addingCol = !addingCol">Cancel</span>
-  </div>
   <br>
-  <Column class="col" v-for="(column, index) in columns" 
-    :key="index" :column="column"/>
-
+  <draggable v-model="columns" group="columns" @start="drag=true" @end="drag=false">
+    <Column class="col" v-for="(column, index) in columns" 
+      :key="index" :column="column"/>
+  </draggable>
   <ModalCol v-if="$store.state.modalCol"/>
   
 </div>
@@ -20,12 +16,14 @@
 <script>
 import Column from './Column.vue'
 import ModalCol from './modals/ModalCol'
+import draggable from 'vuedraggable';
 
 export default {
   name: 'Main',
   components: {
     Column,
-    ModalCol
+    ModalCol,
+    draggable
   },
   data() {
     return {
@@ -36,9 +34,8 @@ export default {
   },
   methods: {
     addCol() {
-      this.$store.dispatch('addColumn', { text: this.addColHeader });
-      this.addColHeader = "";
-      this.addingCol = !this.addingCol;
+      this.$store.state.modalCol = true;
+      this.$store.state.modalColAdd = true;
     }
   }
 }
@@ -50,6 +47,7 @@ export default {
   display: inline-block;
   margin: 0 10px;
   vertical-align: top;
+  background-color: white;
 }
 .hideBox {
   display: none;

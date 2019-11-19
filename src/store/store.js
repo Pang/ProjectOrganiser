@@ -28,14 +28,14 @@ export const store = new Vuex.Store({
         selectedCol: "",
         modalCol: false,
         modalColRemove: false,
-        modalColEdit: false
-
+        modalColEdit: false,
+        modelColAdd: false
     },
     getters: {
     },
     mutations: {
         addColumn: (state, payload) => {
-            state.taskLists.push({ title: payload.text, tasks: [] });
+            state.taskLists.push({ title: payload.title, tasks: [] });
         },
         removeColumn: (state, payload) => {
             state.taskLists.splice(state.taskLists.findIndex(taskLists => payload.title === taskLists.title), 1);

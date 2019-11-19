@@ -13,10 +13,6 @@
             </div>
             <span class="moreIcon" @click="addNote = !addNote"><b>+</b></span>
         </div>
-        <div class="modal">
-            
-        </div>
-
 
         <h4>{{ column.title }}</h4>
         <div :class="[addNote ? 'showBox' : 'hideBox']"> 
@@ -107,12 +103,10 @@ export default {
     .hideBox {
         display: none;
     }
-
     li {
         list-style-type: none;
         cursor: pointer;
     }
-
     li + li {
         margin-top: 10px;
     }

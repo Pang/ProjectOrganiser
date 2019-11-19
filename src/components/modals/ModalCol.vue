@@ -12,7 +12,13 @@
             <p>Are you sure you want to delete this column?</p>
             <button @click="removeColumn()">YES</button>
             <button @click="closeModal()">NO</button>
+        </div>
 
+        <div class="modal-content" v-if="$store.state.modalColAdd">
+            <span  style="float: right" @click="closeModal()">X</span>
+            <p>Enter a name for your column:</p>
+            <input v-model="colHeaderText" type="text" /> <br><br>
+            <button @click="addColumn()">Submit</button>
         </div>
     </div>
 </template>
@@ -30,6 +36,7 @@ export default {
             this.$store.state.modalCol = false;
             this.$store.state.modalColEdit = false;
             this.$store.state.modalColRemove = false;
+            this.$store.state.modalColAdd = false;
         },
         changeHeader() {
             this.$store.dispatch('editColumnHeader', { title: this.$store.state.selectedCol, newTitle: this.colHeaderText });
@@ -37,6 +44,10 @@ export default {
         },
         removeColumn() {
             this.$store.dispatch('removeColumn', { title: this.$store.state.selectedCol });
+            this.closeModal();
+        },
+        addColumn() {
+            this.$store.dispatch('addColumn', { title: this.colHeaderText });
             this.closeModal();
         }
     }
