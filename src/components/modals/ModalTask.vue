@@ -56,4 +56,8 @@ export default {
     float: right; 
     cursor: pointer
 }
+textarea {
+    width: 300px;
+    height: 100px;
+}
 </style>
