@@ -26,10 +26,11 @@ export const store = new Vuex.Store({
             }
         ],
         selectedCol: "",
-        modalCol: false,
         modalColRemove: false,
         modalColEdit: false,
-        modelColAdd: false
+        modalColAdd: false,
+        selectedTask: "",
+        modalTaskEdit: false
     },
     getters: {
     },
@@ -46,7 +47,20 @@ export const store = new Vuex.Store({
         addTask: (state, payload) => {
             state.taskLists.find(taskLists => payload.title === taskLists.title)
                 .tasks.unshift(payload.text);
-        }
+        },
+        editTask: (state, payload) => {
+            let colIndex = state.taskLists.findIndex(taskLists => payload.title === taskLists.title);
+            let taskIndex = state.taskLists.find(taskLists => payload.title === taskLists.title).tasks.findIndex(tasks => payload.task === tasks)
+
+            Vue.set(state.taskLists[colIndex].tasks, taskIndex, payload.newTask);
+        },
+        removeTask: (state, payload) => {
+            let colIndex = state.taskLists.findIndex(taskLists => payload.title === taskLists.title);
+            let taskIndex = state.taskLists.find(taskLists => payload.title === taskLists.title).tasks.findIndex(tasks => payload.task === tasks)
+
+            state.taskLists[colIndex].tasks.splice(taskIndex, 1);
+
+        },
     },
     actions: {
         addColumn: ({ commit }, payload) => {
@@ -60,6 +74,12 @@ export const store = new Vuex.Store({
         },
         addTask: ({ commit }, payload) => {
             commit("addTask", payload);
-        }
+        },
+        editTask: ({ commit }, payload) => {
+            commit("editTask", payload);
+        },
+        removeTask: ({ commit }, payload) => {
+            commit("removeTask", payload);
+        },
     }
 });

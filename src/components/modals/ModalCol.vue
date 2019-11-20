@@ -1,21 +1,21 @@
 <template>
     <div class="modal">
         <div class="modal-content" v-if="$store.state.modalColEdit">
-            <span  style="float: right" @click="closeModal()">X</span>
+            <span class="close" @click="closeModal()">X</span>
             <p>Enter a new header for this column:</p>
             <input v-model="colHeaderText" type="text" /> <br><br>
             <button @click="changeHeader()">Submit</button>
         </div>
 
         <div class="modal-content" v-if="$store.state.modalColRemove">
-            <span  style="float: right" @click="closeModal()">X</span>
+            <span class="close" @click="closeModal()">X</span>
             <p>Are you sure you want to delete this column?</p>
             <button @click="removeColumn()">YES</button>
             <button @click="closeModal()">NO</button>
         </div>
 
         <div class="modal-content" v-if="$store.state.modalColAdd">
-            <span  style="float: right" @click="closeModal()">X</span>
+            <span class="close" @click="closeModal()">X</span>
             <p>Enter a name for your column:</p>
             <input v-model="colHeaderText" type="text" /> <br><br>
             <button @click="addColumn()">Submit</button>
@@ -33,7 +33,6 @@ export default {
     },
     methods: {
         closeModal() {
-            this.$store.state.modalCol = false;
             this.$store.state.modalColEdit = false;
             this.$store.state.modalColRemove = false;
             this.$store.state.modalColAdd = false;
@@ -73,6 +72,10 @@ export default {
     border: 1px solid #888;
     width: 400px;
     z-index: 2;
+}
+.close {
+    float: right; 
+    cursor: pointer
 }
 button + button {
     margin-left: 20px;
