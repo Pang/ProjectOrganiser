@@ -1,24 +1,3 @@
-# project-organiser
+A drag and drop project organiser (similar to Github Projects & Trello) https://github.com/Pang/ProjectOrganiser/projects/1
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This app will be developed in Vue for the frontend and NodeJs(Express) on the backend.
