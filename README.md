@@ -5,3 +5,5 @@ Drag and drop app for organising tasks. Similar to Trello. https://github.com/Pa
 #### API: Node.js & Express 4.17
 #### ORM: Sequalize?
 #### Database: MySql?
+
+![Image of DB UML](./ProjectOrganiser.API/DbUml.png)
