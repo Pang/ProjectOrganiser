@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 
 module.exports = new sequelize({
     dialect: 'sqlite',
-    storage: 'path/to/database.sqlite',
+    storage: './database.sqlite',
     pool: {
       max: 5,
       min: 0,
